@@ -1,7 +1,5 @@
--- leader
 vim.g.mapleader = " "
 
--- lazy path and bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,30 +10,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- lazy plugins
 require("lazy").setup({
-
-  -- ayu mirage theme
   {
-    "Shatur/neovim-ayu",
+    "sainnhe/everforest",
     config = function()
-      require("ayu").setup({ mirage = true })
-      vim.cmd("colorscheme ayu")
+      vim.cmd("colorscheme everforest")
     end,
   },
-
-  -- telescope fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("telescope").setup()
-      vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>") -- files
-      vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>") -- grep text
+      vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
+      vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
     end,
   },
-
-  -- treesitter highlight and indentation
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -49,7 +39,6 @@ require("lazy").setup({
   },
 })
 
--- basics
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.shiftwidth = 4
